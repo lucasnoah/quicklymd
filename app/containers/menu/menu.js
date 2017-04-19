@@ -1,0 +1,135 @@
+import { React } from 'globalImports'
+
+export default class Menu extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      authed: true,
+      services_clicked: false,
+    }
+  }
+
+  toggleServices() {
+    this.state.services_clicked = !this.state.services_clicked
+  }
+
+  renderFAQ() {
+    return (
+      <div>
+        <button className='secondary-buttons'>FAQ</button>
+      </div>
+    )
+  }
+  renderMedTeam() {
+    return (
+      <div>
+        <button className='secondary-buttons'>Medical Team</button>
+      </div>
+    )
+  }
+  renderReviews() {
+    return (
+      <div>
+        <button className='secondary-buttons'>Reviews</button>
+      </div>
+    )
+  }
+  renderHowItWorks() {
+    return (
+      <div>
+        <button className='secondary-buttons'>How it works</button>
+      </div>
+    )
+  }
+  renderServices() {
+    if(!this.state.services_clicked) {
+      return (
+        <div>
+          <button className='secondary-buttons' onClick={this.toggleServices()}>Services</button>
+        </div>
+      )
+    }
+    else {
+      return (
+        <div>
+          <button className='secondary-buttons' onClick={this.toggleServices()}>Services</button>
+          <div className='services-menu-container'>
+            {this.renderSevicesMenu()}
+          </div>
+        </div>
+      )
+    }
+  }
+
+  renderServicesMenu() {
+    return (
+      <div>
+        <button className='services-menu-button'>crazy pills</button>
+        <button className='services-menu-button'>boner pills</button>
+        <button className='services-menu-button'>rash pills</button>
+        <button className='services-menu-button'>limitless pills</button>
+      </div>
+    )
+  }
+  renderContact() {
+    return (
+      <div>
+        <button className='contact-button secondary-buttons'>Contact</button>
+      </div>
+    )
+  }
+
+  renderAuthButtons(){
+    if(this.state.authed){
+      return <div>
+        <button className='auth-button primary-buttons'>Login</button>
+      </div>
+    }
+    else{
+      return <div>
+        <button className='auth-button primary-buttons'>Logout</button>
+      </div>
+    }
+  }
+
+  renderStartButton() {
+    return (
+      <div>
+        <button className='start-button primary-buttons'>Start Visit</button>
+      </div>
+    )
+  }
+
+  renderLogo() {
+    return (
+      <div>
+        <div>Q/md Logo</div>
+      </div>
+    )
+  }
+
+  render() {
+    return (
+      <div className='menu-container'>
+        <div className='secondary-container'>
+          <div className='logo'>
+            {this.renderLogo()}
+          </div>
+          <div className='nested-secondary'>
+            {this.renderFAQ()}
+            {this.renderMedTeam()}
+            {this.renderReviews()}
+            {this.renderHowItWorks()}
+            {this.renderServices()}
+            {this.renderContact()}
+          </div>
+        </div>
+        <div className='primary-container'>
+          {this.renderAuthButtons()}
+          {this.renderStartButton()}
+        </div>
+      </div>
+    )
+  }
+}
