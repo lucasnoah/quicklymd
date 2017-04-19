@@ -8,10 +8,17 @@ export default class Menu extends React.Component {
       authed: true,
       services_clicked: false,
     }
+    this.toggleServices = this.toggleServices.bind(this)
+    this.renderServices = this.renderServices.bind(this)
+    this.renderServicesMenu = this.renderServicesMenu.bind(this)
   }
 
   toggleServices() {
-    this.state.services_clicked = !this.state.services_clicked
+    let x = !this.state.services_clicked
+    this.setState({
+      services_clicked : x
+    })
+    console.log('toggle')
   }
 
   renderFAQ() {
@@ -43,34 +50,25 @@ export default class Menu extends React.Component {
     )
   }
   renderServices() {
-    if(!this.state.services_clicked) {
-      return (
-        <div>
-          <button className='secondary-buttons' onClick={this.toggleServices()}>Services</button>
-        </div>
-      )
-    }
-    else {
-      return (
-        <div>
-          <button className='secondary-buttons' onClick={this.toggleServices()}>Services</button>
-          <div className='services-menu-container'>
-            {this.renderSevicesMenu()}
-          </div>
-        </div>
-      )
-    }
+    return (
+      <div>
+        <button className='secondary-buttons' onClick={this.toggleServices}>Services</button>
+      </div>
+    )
   }
 
   renderServicesMenu() {
-    return (
-      <div>
-        <button className='services-menu-button'>crazy pills</button>
-        <button className='services-menu-button'>boner pills</button>
-        <button className='services-menu-button'>rash pills</button>
-        <button className='services-menu-button'>limitless pills</button>
-      </div>
-    )
+    console.log('service-menu')
+    if(this.state.services_clicked) {
+      return (
+        <div className='services-menu-container'>
+          <button className='services-menu-button'>crazy pills</button>
+          <button className='services-menu-button'>boner pills</button>
+          <button className='services-menu-button'>rash pills</button>
+          <button className='services-menu-button'>limitless pills</button>
+        </div>
+      )
+    }
   }
   renderContact() {
     return (
@@ -111,23 +109,28 @@ export default class Menu extends React.Component {
 
   render() {
     return (
-      <div className='menu-container'>
-        <div className='secondary-container'>
-          <div className='logo'>
-            {this.renderLogo()}
+      <div>
+        <div className='menu-container'>
+          <div className='secondary-container'>
+            <div className='logo'>
+              {this.renderLogo()}
+            </div>
+            <div className='nested-secondary'>
+              {this.renderFAQ()}
+              {this.renderMedTeam()}
+              {this.renderReviews()}
+              {this.renderHowItWorks()}
+              {this.renderServices()}
+              {this.renderContact()}
+            </div>
           </div>
-          <div className='nested-secondary'>
-            {this.renderFAQ()}
-            {this.renderMedTeam()}
-            {this.renderReviews()}
-            {this.renderHowItWorks()}
-            {this.renderServices()}
-            {this.renderContact()}
+          <div className='primary-container'>
+            {this.renderAuthButtons()}
+            {this.renderStartButton()}
           </div>
         </div>
-        <div className='primary-container'>
-          {this.renderAuthButtons()}
-          {this.renderStartButton()}
+        <div>
+          {this.renderServicesMenu()}
         </div>
       </div>
     )
