@@ -50,12 +50,13 @@
   justify-content: space-between;
   height: 100%;
   width: 85%;
-  // flex-direction: row;
 }
+
 .secondary-buttons {
   background-color: white;
   border: 0;
 }
+
 .nested-secondary {
   display: flex;
   justify-content: space-around;
@@ -63,6 +64,21 @@
   width: 50%;
   align-items: center;
 }
+
 .logo {
   align-self: center;
+}
+
+.services-menu-container {
+  display: flex;
+  flex-direction: column;
+  height: 8rem;
+  width: 100%;
+  align-items: center;
+  padding-left: 5%;
+}
+
+.services-menu-button {
+  height: 25%;
+  width: 5%;
 }

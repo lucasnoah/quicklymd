@@ -1,4 +1,4 @@
-import { React } from 'globalImports'
+import { React } from "globalImports"
 
 export default class Menu extends React.Component {
 
@@ -8,74 +8,71 @@ export default class Menu extends React.Component {
       authed: true,
       services_clicked: false,
     }
+    this.toggleServices = this.toggleServices.bind(this)
+    this.renderServices = this.renderServices.bind(this)
+    this.renderServicesMenu = this.renderServicesMenu.bind(this)
   }
 
   toggleServices() {
-    this.state.services_clicked = !this.state.services_clicked
+    let x = !this.state.services_clicked
+    this.setState({
+      services_clicked : x
+    })
+    console.log("toggle")
   }
 
   renderFAQ() {
     return (
       <div>
-        <button className='secondary-buttons'>FAQ</button>
+        <button className="secondary-buttons">FAQ</button>
       </div>
     )
   }
   renderMedTeam() {
     return (
       <div>
-        <button className='secondary-buttons'>Medical Team</button>
+        <button className="secondary-buttons">Medical Team</button>
       </div>
     )
   }
   renderReviews() {
     return (
       <div>
-        <button className='secondary-buttons'>Reviews</button>
+        <button className="secondary-buttons">Reviews</button>
       </div>
     )
   }
   renderHowItWorks() {
     return (
       <div>
-        <button className='secondary-buttons'>How it works</button>
+        <button className="secondary-buttons">How it works</button>
       </div>
     )
   }
   renderServices() {
-    if(!this.state.services_clicked) {
-      return (
-        <div>
-          <button className='secondary-buttons' onClick={this.toggleServices()}>Services</button>
-        </div>
-      )
-    }
-    else {
-      return (
-        <div>
-          <button className='secondary-buttons' onClick={this.toggleServices()}>Services</button>
-          <div className='services-menu-container'>
-            {this.renderSevicesMenu()}
-          </div>
-        </div>
-      )
-    }
+    return (
+      <div>
+        <button className="secondary-buttons" onClick={this.toggleServices}>Services</button>
+      </div>
+    )
   }
 
   renderServicesMenu() {
-    return (
-      <div>
-        <button className='services-menu-button'>crazy pills</button>
-        <button className='services-menu-button'>boner pills</button>
-        <button className='services-menu-button'>rash pills</button>
-        <button className='services-menu-button'>limitless pills</button>
-      </div>
-    )
+    if(this.state.services_clicked) {
+      return (
+        <div className="services-menu-container">
+          <button className="services-menu-button">crazy pills</button>
+          <button className="services-menu-button">boner pills</button>
+          <button className="services-menu-button">rash pills</button>
+          <button className="services-menu-button">limitless pills</button>
+        </div>
+      )
+    }
   }
   renderContact() {
     return (
       <div>
-        <button className='contact-button secondary-buttons'>Contact</button>
+        <button className="contact-button secondary-buttons">Contact</button>
       </div>
     )
   }
@@ -83,12 +80,12 @@ export default class Menu extends React.Component {
   renderAuthButtons(){
     if(this.state.authed){
       return <div>
-        <button className='auth-button primary-buttons'>Login</button>
+        <button className="auth-button primary-buttons">Login</button>
       </div>
     }
     else{
       return <div>
-        <button className='auth-button primary-buttons'>Logout</button>
+        <button className="auth-button primary-buttons">Logout</button>
       </div>
     }
   }
@@ -96,7 +93,7 @@ export default class Menu extends React.Component {
   renderStartButton() {
     return (
       <div>
-        <button className='start-button primary-buttons'>Start Visit</button>
+        <button className="start-button primary-buttons">Start Visit</button>
       </div>
     )
   }
@@ -111,23 +108,28 @@ export default class Menu extends React.Component {
 
   render() {
     return (
-      <div className='menu-container'>
-        <div className='secondary-container'>
-          <div className='logo'>
-            {this.renderLogo()}
+      <div>
+        <div className="menu-container">
+          <div className="secondary-container">
+            <div className="logo">
+              {this.renderLogo()}
+            </div>
+            <div className="nested-secondary">
+              {this.renderFAQ()}
+              {this.renderMedTeam()}
+              {this.renderReviews()}
+              {this.renderHowItWorks()}
+              {this.renderServices()}
+              {this.renderContact()}
+            </div>
           </div>
-          <div className='nested-secondary'>
-            {this.renderFAQ()}
-            {this.renderMedTeam()}
-            {this.renderReviews()}
-            {this.renderHowItWorks()}
-            {this.renderServices()}
-            {this.renderContact()}
+          <div className="primary-container">
+            {this.renderAuthButtons()}
+            {this.renderStartButton()}
           </div>
         </div>
-        <div className='primary-container'>
-          {this.renderAuthButtons()}
-          {this.renderStartButton()}
+        <div>
+          {this.renderServicesMenu()}
         </div>
       </div>
     )
